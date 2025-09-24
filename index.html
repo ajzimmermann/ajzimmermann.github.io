@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Links</title>
+    <title>AJ Zimmermann — Portfolio & Links</title>
     <link rel="stylesheet" href="./style.css" />
   <style>
       .links > a.email{position:relative}
       .links > a.email .tooltip{position:absolute;left:50%;top:100%;transform:translate(-50%,-8px);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;padding:6px 10px;background:rgba(0,0,0,.85);color:#fff;border-radius:6px;font-size:12px;white-space:nowrap;margin-top:6px;z-index:5}
-      .links > a.email:hover .tooltip,.links > a.email:focus-within .tooltip{opacity:1;transform:translate(-50%,0)}
+      .links > a.email:hover .tooltip,.links > a.email:focus-visible .tooltip{opacity:1;transform:translate(-50%,0)}
     </style>
   <style>
       .email-row{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:8px;color:#d2d2d2;font-size:14px}
@@ -18,6 +18,13 @@
       .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;padding:8px 12px;background:rgba(0,0,0,.85);color:#fff;border-radius:8px;font-size:14px;z-index:1000}
       .toast.show{opacity:1;transform:translate(-50%,0)}
     </style>
+  <link rel="icon" href="./image/user.png" type="image/png">
+    <link rel="apple-touch-icon" href="./image/user.png">
+    <link rel="shortcut icon" href="./image/user.png" type="image/png">
+    <meta name="theme-color" content="#0f0f10">
+    <meta property="og:title" content="AJ Zimmermann — Portfolio & Links">
+    <meta property="og:description" content="Junior Electrical Engineering student at Bradley University, with an Associate in Engineering Science from Illinois Central College.">
+    <meta property="og:image" content="https://ajzimmermann.github.io/image/user.png">
   </head>
   <body>
     <div class="container">
@@ -206,16 +213,20 @@
         const el=document.getElementById('contact-email');
         function showToast(text){
           let t=document.querySelector('.toast');
-          if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t);}
-          t.textContent=text;
-          t.classList.add('show');
-          setTimeout(()=>t.classList.remove('show'),1200);
+          if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t);} 
+          t.textContent=text; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1200);
         }
         if(btn&&el){
           btn.addEventListener('click',async()=>{
             try{await navigator.clipboard.writeText(el.textContent.trim());showToast('Email copied');}
             catch(e){showToast('Unable to copy');}
           });
+        }
+        const emailLink=document.querySelector('.links a.email');
+        if(emailLink){
+          const blurLater=()=>setTimeout(()=>emailLink.blur(),100);
+          emailLink.addEventListener('click',blurLater);
+          emailLink.addEventListener('pointerup',blurLater);
         }
       })();
     </script>
