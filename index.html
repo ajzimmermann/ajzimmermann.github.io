@@ -39,6 +39,13 @@
         .sub{font-size:14px;}
       }
     </style>
+  <style>
+      .links a.email.email-mailto{display:none}
+      @media (max-width:640px), (hover:none){
+        .links a.email.email-gmail{display:none}
+        .links a.email.email-mailto{display:flex}
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -211,9 +218,13 @@
           <a href="https://github.com/ded811" target="_blank" rel="noopener">
             <img src="./image/github.png" alt="GitHub" />GitHub
           </a>
-          <a class="email" href="https://mail.google.com/mail/?view=cm&to=ajzimmermannapple@gmail.com" target="_blank" rel="noopener" aria-label="Compose email to AJ in Gmail">
+          <a class="email email-gmail" href="https://mail.google.com/mail/?view=cm&to=ajzimmermannapple@gmail.com" target="_blank" rel="noopener" aria-label="Compose email to AJ in Gmail">
             <img src="./image/email.png" alt="Email" />Email
             <span class="tooltip">Compose in Gmail</span>
+          </a>
+          <a class="email email-mailto" href="mailto:ajzimmermannapple@gmail.com" aria-label="Open mail app to email AJ">
+            <img src="./image/email.png" alt="Email" />Email
+            <span class="tooltip">Open mail app</span>
           </a>
         </div>
       </div>
@@ -236,12 +247,12 @@
             catch(e){showToast('Unable to copy');}
           });
         }
-        const emailLink=document.querySelector('.links a.email');
-        if(emailLink){
-          const blurLater=()=>setTimeout(()=>emailLink.blur(),100);
-          emailLink.addEventListener('click',blurLater);
-          emailLink.addEventListener('pointerup',blurLater);
-        }
+        const emailLinks=document.querySelectorAll('.links a.email');
+        emailLinks.forEach(link=>{
+          const blurLater=()=>setTimeout(()=>link.blur(),100);
+          link.addEventListener('click',blurLater);
+          link.addEventListener('pointerup',blurLater);
+        });
       })();
     </script>
   </body>
